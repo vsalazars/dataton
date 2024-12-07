@@ -3,6 +3,7 @@ Instrucciones para el Proyecto de Análisis de Contrataciones Públicas
 Requisitos previos: Este proyecto utiliza Python 3.8+ y Flask. Asegúrate de instalar las dependencias incluidas en el archivo requirements.txt en un entorno virtual.
 
 Archivo de datos: Descarga el archivo data.json desde la Plataforma Digital Nacional. Colócalo en la raíz del proyecto.
+https://www.plataformadigitalnacional.org/contrataciones
 
 Ejecución:
 Ejecuta el servidor con python app.py.
