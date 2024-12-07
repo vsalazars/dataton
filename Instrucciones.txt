@@ -1,0 +1,11 @@
+Instrucciones para el Proyecto de Análisis de Contrataciones Públicas
+
+Requisitos previos: Este proyecto utiliza Python 3.8+ y Flask. Asegúrate de instalar las dependencias incluidas en el archivo requirements.txt en un entorno virtual.
+
+Archivo de datos: Descarga el archivo data.json desde la Plataforma Digital Nacional. Colócalo en la raíz del proyecto.
+
+Ejecución:
+Ejecuta el servidor con python app.py.
+Accede a la aplicación en http://127.0.0.1:5000.
+Archivos temporales: Los resultados procesados se almacenan en la carpeta temp_results. Puedes limpiar esta carpeta utilizando la función clear_temp_files() incluida en el código.
+
