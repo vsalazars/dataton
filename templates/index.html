@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Datatón Anticorrupción 2024</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* Asegurar que html y body ocupen toda la altura */
+        html, body {
+            height: 100%;
+        }
+
+        /* Configurar body como flex container */
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0A2F3A;
+            color: #f4f4f4;
+        }
+
+        /* Estilos del header */
+        header {
+            background-color: #103F50;
+            color: white;
+            padding: 15px 20px;
+            flex-shrink: 0;
+        }
+
+        /* Estilos del contenido principal */
+        main {
+            flex: 1 0 auto; /* Importante: hace que main ocupe el espacio disponible */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centra el contenido verticalmente */
+        }
+
+        /* Estilos del footer */
+        footer {
+            background-color: #103F50;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            flex-shrink: 0;
+        }
+
+        h1, h2, h4, h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .btn-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; /* Centrar el contenido del botón */
+    color: #e7e7e7; /* Color inicial */
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    margin: 10px 15px;
+    padding: 10px; /* Espaciado interno */
+    transition: all 0.3s ease; /* Animación suave */
+    background: none;
+    border: 2px solid #0081B3; /* Borde para definición */
+    border-radius: 50px; /* Bordes completamente redondeados */
+}
+
+.btn-icon i {
+    margin-right: 8px;
+}
+
+.btn-icon:hover {
+    color: #ffffff; /* Color del texto al pasar el mouse */
+    background-color: #0081B3; /* Fondo al pasar el mouse */
+    border-color: #0081B3; /* Borde consistente con el fondo */
+}
+
+.btn-icon:active, .btn-icon:focus {
+    color: #ffffff; /* Color del texto al presionar */
+    background-color: #006F94; /* Fondo más oscuro al presionar */
+    border-color: #006F94; /* Borde consistente con el fondo */
+    transform: scale(0.95); /* Efecto de presión */
+    outline: none; /* Eliminar el borde azul de foco predeterminado */
+}
+
+
+
+        table.striped {
+    margin: 20px auto; /* Centrar la tabla horizontalmente */
+    max-width: 90%; /* Limitar el ancho de la tabla */
+    border-collapse: collapse; /* Eliminar el espacio entre bordes */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Aplicar redondeo incluso en el contenido */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera para destacar */
+}
+
+table.striped th, table.striped td {
+    color: #f4f4f4; /* Texto claro */
+    padding: 10px 15px; /* Espaciado interno */
+    text-align: left; /* Alinear texto a la izquierda */
+    border-bottom: 1px solid #103F50; /* Línea separadora */
+}
+
+table.striped th {
+    background-color: #103F50; /* Fondo para encabezados */
+    font-family: 'Poppins', sans-serif; /* Fuente de encabezados */
+    font-weight: 600; /* Mayor peso para diferenciar */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+table.striped td {
+    background-color: #0A2F3A; /* Fondo para celdas */
+    font-family: 'Montserrat', sans-serif; /* Fuente de contenido */
+}
+
+table.striped tr:nth-child(even) td {
+    background-color: #103F50; /* Fondo alternado */
+}
+
+table.striped tr:hover td {
+    background-color: #0081B3; /* Fondo al pasar el cursor */
+    color: #ffffff; /* Texto claro */
+    transition: background-color 0.3s ease; /* Animación de fondo */
+}
+
+
+       
+        .center-align {
+            text-align: center;
+        }
+        footer {
+            background-color: #103F50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .card {
+        margin: 15px; /* Espaciado entre tarjetas */
+        background-color: #103F50; /* Fondo de las tarjetas */
+        color: #f4f4f4; /* Texto claro */
+    }
+
+    .card-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+    }
+
+    .card-content p {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+    }
+
+   /* Loading overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 47, 58, 0.8); /* Fondo semitransparente */
+    display: none; /* Oculto por defecto */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-overlay.active {
+    display: flex; /* Mostrar el overlay cuando está activo */
+}
+
+/* Contenedor del spinner */
+.spinner-content {
+    text-align: center;
+    color: #01b0f5; /* Color primario */
+}
+
+/* Mensaje de carga */
+.loading-message {
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px; /* Tamaño más grande */
+    font-weight: 700; /* Negrita para resaltar */
+    color: #f4f4f4; /* Texto claro */
+}
+
+/* Spinner styles */
+.preloader-wrapper {
+    width: 150px; /* Tamaño del spinner */
+    height: 150px;
+}
+
+.spinner-layer {
+    position: relative;
+}
+
+.spinner-layer.spinner-blue .circle-clipper .circle {
+    border-width: 8px; /* Grosor de las líneas */
+    border-color: #01b0f5; /* Color principal */
+    border-style: solid; /* Líneas sólidas */
+    animation: rotate 0.8s linear infinite; /* Animación continua */
+}
+
+.spinner-layer.spinner-blue .circle-clipper.left .circle,
+.spinner-layer.spinner-blue .circle-clipper.right .circle {
+    border-width: 8px; /* Consistencia en el grosor */
+    border-color: #01b0f5; /* Color consistente */
+}
+
+/* Animación personalizada */
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+ /* Estilos del acordeón */
+ .collapsible {
+        margin: 20px auto;
+        max-width: 90%;
+        background-color: #103F50;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .collapsible-header {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 15px 20px;
+        background-color: #0A2F3A;
+        color: #01b0f5;
+        cursor: pointer;
+        border-bottom: 1px solid #0081B3;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .collapsible-header:hover {
+        background-color: #0081B3;
+        color: #ffffff;
+    }
+
+    .collapsible-body {
+        padding: 20px;
+        background-color: #0A2F3A;
+        color: #f4f4f4;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+    }
+
+    .collapsible-body pre {
+        background-color: #0A2F3A;
+        color: #01b0f5;
+        padding: 15px;
+        border-radius: 8px;
+        font-family: 'Courier New', Courier, monospace;
+        overflow-x: auto;
+    }
+
+    .collapsible-body p {
+        margin-bottom: 15px;
+    }
+
+    .center-align {
+        text-align: center;
+    }
+
+    /* Ajustes de animación */
+    .collapsible .collapsible-header.active {
+        background-color: #0081B3;
+        color: #ffffff;
+    }
+
+    .collapsible.expandable .collapsible-body {
+        display: block;
+        animation: slide-down 0.3s ease;
+    }
+
+    @keyframes slide-down {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h4>Datatón Anticorrupción 2024</h4>
+
+<!-- Bloque de explicación y botones -->
+<div class="container">
+
+    <!-- Botones con iconos -->
+    <div class="center-align">
+        <form method="POST" action="/">
+            <button class="btn-icon" type="submit" name="analysis_type" value="concentration">
+                <i class="material-icons">bar_chart</i>Análisis de Concentración
+            </button>
+            <button class="btn-icon" type="submit" name="analysis_type" value="direct_awards">
+                <i class="material-icons">assignment</i>Adjudicaciones Directas
+            </button>
+            <button class="btn-icon" type="submit" name="analysis_type" value="temporal_distribution">
+                <i class="material-icons">timeline</i>Distribución Temporal
+            </button>
+            <button class="btn-icon" type="submit" name="analysis_type" value="monopolistic_suppliers">
+                <i class="material-icons">person</i>Proveedores Monopólicos
+            </button>
+        </form>
+    </div>
+</div>
+
+</header>
+
+
+
+
+<div class="container">
+    <ul class="collapsible popout">
+        <!-- Sección para Análisis de Concentración -->
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">bar_chart</i>Análisis de Concentración
+            </div>
+            <div class="collapsible-body">
+                <p>
+                    Los indicadores permiten analizar las contrataciones públicas desde diferentes perspectivas: el número total de
+                    contratos asignados a un proveedor por una entidad compradora refleja la frecuencia de la relación; el monto total
+                    adjudicado muestra la magnitud económica de esa relación. Además, el porcentaje de contratos permite identificar la
+                    concentración operativa, mientras que el porcentaje del monto adjudicado evalúa la concentración financiera.
+                    Este análisis permite identificar el nivel de concentración, prácticas monopólicas o posibles indicios clave
+                    en las relaciones entre proveedores y entidades públicas.
+                </p>
+                <pre style="background-color: #0A2F3A; color: #01b0f5; padding: 15px; border-radius: 8px; font-family: 'Courier New', Courier, monospace;">
+        
+        grouped = awards.groupby(['buyer_name', 'supplier_name']).agg(contracts=('id', 'count'),
+        total_amount=('amount', 'sum')).reset_index()
+
+        # Cálculo de participaciones porcentuales
+        grouped['contract_share'] = grouped.groupby('buyer_name')['contracts']transform(lambda x: x / x.sum() * 100)
+        grouped['amount_share'] = grouped.groupby('buyer_name')['total_amount']transform(lambda x: x / x.sum() * 100)
+
+        # Selección de los top 100 por monto total adjudicado
+        top_100_by_amount = grouped.sort_values(by='total_amount', ascending=False).head(100)
+                </pre>
+            </div>
+        </li>
+
+        <!-- Sección para Adjudicaciones Directas -->
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">assignment</i>Adjudicaciones Directas
+            </div>
+            <div class="collapsible-body">
+                <p>
+                    Las adjudicaciones directas se analizan para identificar proveedores que concentran
+                    contratos asignados sin procesos competitivos. Este análisis calcula el número total
+                    de contratos y el monto total adjudicado directamente, destacando los principales
+                    proveedores por su participación en estos contratos. Así, se identifican posibles
+                    riesgos como favoritismos o prácticas poco transparentes.
+                </p>
+                <pre style="background-color: #0A2F3A; color: #01b0f5; padding: 15px; border-radius: 8px; font-family: 'Courier New', Courier, monospace;">
+
+        filtered_data = chunk[chunk['tender.procurementMethod'] == 'direct'].copy()
+
+        # Asegurar que 'contracts' y 'awards' sean listas
+        filtered_data['contracts'] = filtered_data['contracts'].apply(lambda x: x if isinstance(x, list) else [])
+        filtered_data['awards'] = filtered_data['awards'].apply(lambda x: x if isinstance(x, list) else [])
+
+        # Expandir contratos y adjudicaciones
+        contracts = filtered_data.explode('contracts')
+        awards = filtered_data.explode('awards')
+
+        # Normalizar datos y agregar prefijos
+        contracts_normalized = pd.json_normalize(contracts['contracts'].dropna(), sep='.').add_prefix('contracts.')
+        awards_normalized = pd.json_normalize(awards['awards'].dropna(), sep='.').add_prefix('awards.')
+
+        # Fusionar contratos con adjudicaciones
+        contracts_merged = contracts_normalized.merge(
+        awards_normalized[['awards.id', 'awards.suppliers']],left_on='contracts.awardID',right_on='awards.id',how='left')
+                </pre>
+            </div>
+        </li>
+
+        <!-- Sección para Distribución Temporal -->
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">timeline</i>Distribución Temporal
+            </div>
+            <div class="collapsible-body">
+                <p>
+                    El análisis de distribución temporal permite identificar tendencias y patrones en las contrataciones
+                    públicas a lo largo del tiempo. A través de este análisis, se calcula el número de contratos y el monto
+                    total adjudicado por mes, proporcionando una visión clara sobre la dinámica temporal de las adjudicaciones.
+                    Esto ayuda a identificar picos inusuales, estacionalidades o posibles eventos en el tiempo de las contrataciones.
+                </p>
+                <pre style="background-color: #0A2F3A; color: #01b0f5; padding: 15px; border-radius: 8px; font-family: 'Courier New', Courier, monospace;">
+
+        # Convertir fechas a formato datetime
+        awards['award_date'] = pd.to_datetime(awards['contractPeriod.startDate'],errors='coerce')
+
+        # Filtrar registros válidos
+        awards = awards.dropna(subset=['award_date'])
+
+        # Agregar columna del mes
+        awards['month'] = awards['award_date'].dt.to_period('M')
+
+        # Agrupar por mes
+        grouped = awards.groupby('month').agg(num_contracts=('id', 'count'),total_amount=('value.amount', 'sum')).reset_index()
+
+        # Convertir 'month' a string para la visualización
+        grouped['month'] = grouped['month'].astype(str)
+                </pre>
+            </div>
+        </li>
+
+        <!-- Sección para Proveedores Monopólicos -->
+        <li>
+            <div class="collapsible-header">
+                <i class="material-icons">person</i>Proveedores Monopólicos
+            </div>
+            <div class="collapsible-body">
+                <p>
+                    El análisis de proveedores monopólicos identifica aquellos casos donde
+                    un proveedor concentra una proporción significativa (más del 90%) de los
+                    contratos o montos adjudicados dentro de una misma categoría.
+                    Este análisis es permite detectar posibles riesgos de prácticas monopólicas o
+                    favoritismos en las contrataciones públicas.
+                </p>
+                <pre style="background-color: #0A2F3A; color: #01b0f5; padding: 15px; border-radius: 8px; font-family: 'Courier New', Courier, monospace;">
+
+        # Agrupar por categoría y proveedor
+        grouped = combined_items.groupby(['category_id', 'category_name','supplier_name'], as_index=False).
+        agg(num_contracts=('award_id', 'count'),total_amount=('amount', 'sum'))
+
+        # Calcular porcentaje de contratos por categoría
+        grouped['contract_share'] = grouped.groupby('category_id')['num_contracts']transform(lambda x: x / x.sum() * 100)
+
+        # Filtrar proveedores monopólicos (>90% de los contratos en una categoría)
+        monopolistic = grouped[grouped['contract_share'] > 90]
+
+        # Ordenar por monto total adjudicado
+        monopolistic = monopolistic.sort_values(by='total_amount', ascending=False)
+                </pre>
+            </div>
+        </li>
+    </ul>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const elems = document.querySelectorAll('.collapsible');
+        M.Collapsible.init(elems, {accordion: false});
+    });
+</script>
+
+
+<br><br>
+
+
+   <!-- Mostrar resultados del análisis de concentración -->
+   {% if analysis_type == "concentration" %}
+   <h5 class="center-align">Resultados del Análisis de Concentración de Contrataciones</h5>
+   <table class="striped responsive-table">
+       <thead>
+           <tr>
+               <th>Entidad Compradora</th>
+               <th>Proveedor</th>
+               <th>Contratos</th>
+               <th>Monto Total (MXN)</th>
+               <th>% de Contratos</th>
+               <th>% del Monto</th>
+           </tr>
+       </thead>
+       <tbody>
+           {% for result in results %}
+           <tr>
+               <td>{{ result.buyer_name }}</td>
+               <td>{{ result.supplier_name }}</td>
+               <td>{{ result.contracts }}</td>
+               <td>{{ "{:,.2f}".format(result.total_amount) }}</td>
+               <td>{{ "{:,.2f}".format(result.contract_share) }}%</td>
+               <td>{{ "{:,.2f}".format(result.amount_share) }}%</td>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table><br><br><br>
+{% endif %}
+
+{% if analysis_type == "direct_awards" %}
+<h5 class="center-align">Empresas con Más Adjudicaciones Directas (por Total de Contratos)</h5>
+<table class="striped responsive-table">
+   <thead>
+       <tr>
+           <th>Proveedor</th>
+           <th>Total Contratos</th>
+           <th>Monto Total (MXN)</th>
+           <th>Entidades Compradoras</th>
+       </tr>
+   </thead>
+   <tbody>
+       {% for record in results %}
+       <tr>
+           <td>{{ record.proveedor }}</td>
+           <td>{{ record.total_contratos }}</td>
+           <td>{{ "{:,.2f}".format(record.monto_total_mxn) }}</td>
+           <td>
+               <ul>
+                   {% for entidad in record.detalles.entidades_compradoras %}
+                   <li>
+                       {{ entidad.nombre_entidad }}: {{ entidad.total_contratos }} contratos,
+                       {{ "{:,.2f}".format(entidad.monto_total_mxn) }} MXN
+                   </li>
+                   {% endfor %}
+               </ul>
+           </td>
+       </tr>
+       {% endfor %}
+   </tbody>
+</table><br><br><br>
+{% endif %}
+
+{% if analysis_type == "temporal_distribution" %}
+<h5 class="center-align">Distribución Temporal de Contrataciones</h5>
+
+<!-- Contenedor para Número de Contratos -->
+<div class="chart-container">
+   <h5 class="center-align">Número de Contratos por Mes</h5>
+   <canvas id="contractsChart"></canvas>
+</div>
+
+<!-- Contenedor para Monto Total -->
+<div class="chart-container">
+   <h5 class="center-align">Monto Total (MXN) por Mes</h5>
+   <canvas id="amountChart"></canvas>
+</div>
+
+<br><br><br>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+   // Datos dinámicos desde el backend
+   const temporalDistribution = {{ results | tojson }};
+
+   // Extraer datos del backend
+   const labels = temporalDistribution.labels; // Fechas (eje X)
+   const numContracts = temporalDistribution.num_contracts; // Número de contratos (eje Y)
+   const totalAmount = temporalDistribution.total_amount; // Monto total (eje Y)
+
+  // Crear gráfica para Número de Contratos
+   const ctxContracts = document.getElementById('contractsChart').getContext('2d');
+   new Chart(ctxContracts, {
+       type: 'line', // Gráfica de línea
+       data: {
+           labels: labels, // Fechas en el eje X
+           datasets: [{
+               label: 'Número de Contratos',
+               data: numContracts, // Datos del eje Y
+               backgroundColor: 'rgba(54, 162, 235, 0.2)', // Color del área debajo de la línea
+               borderColor: 'rgba(54, 162, 235, 1)', // Color de la línea
+               borderWidth: 2,
+               fill: true // Rellenar debajo de la línea
+           }]
+       },
+       options: {
+           responsive: true,
+           plugins: {
+               legend: {
+                   display: true,
+                   position: 'top'
+               },
+               tooltip: {
+                   enabled: true,
+               },
+           },
+           scales: {
+               y: {
+                   beginAtZero: true,
+                   title: {
+                       display: true,
+                       text: 'Número de Contratos'
+                   }
+               },
+               x: {
+                   title: {
+                       display: true,
+                       text: 'Mes'
+                   }
+               }
+           }
+       }
+   });
+
+
+   // Crear gráfica para Monto Total (MXN)
+   const ctxAmount = document.getElementById('amountChart').getContext('2d');
+   new Chart(ctxAmount, {
+       type: 'line', // Gráfica de línea
+       data: {
+           labels: labels, // Fechas en el eje X
+           datasets: [{
+               label: 'Monto Total (MXN)',
+               data: totalAmount, // Datos del eje Y
+               backgroundColor: 'rgba(255, 99, 132, 0.2)', // Color del área
+               borderColor: 'rgba(255, 99, 132, 1)', // Color de la línea
+               borderWidth: 2,
+               fill: true, // Rellenar debajo de la línea
+           }]
+       },
+       options: {
+           responsive: true,
+           plugins: {
+               legend: {
+                   display: true,
+                   position: 'top'
+               },
+               tooltip: {
+                   enabled: true,
+               },
+           },
+           scales: {
+               y: {
+                   beginAtZero: true,
+                   title: {
+                       display: true,
+                       text: 'Monto Total (MXN)'
+                   }
+               },
+               x: {
+                   title: {
+                       display: true,
+                       text: 'Mes'
+                   }
+               }
+           }
+       }
+   });
+</script>
+{% endif %}
+
+{% if analysis_type == "monopolistic_suppliers" %}
+<h5 class="center-align">Proveedores Monopólicos</h5>
+<table class="striped responsive-table">
+   <thead>
+       <tr>
+           <th>Categoría ID</th>
+           <th>Item de la Categoría</th>
+           <th>Proveedor</th>
+           <th>Número de Contratos</th>
+           <th>Monto Total de la categoría (MXN)</th>
+           <th>% de Contratos</th>
+       </tr>
+   </thead>
+   <tbody>
+       {% for record in results %}
+       <tr>
+           <td>{{ record.category_id }}</td>
+           <td>{{ record.category_name }}</td>
+           <td>{{ record.supplier_name }}</td>
+           <td>{{ record.num_contracts }}</td>
+           <td>{{ "{:,.2f}".format(record.total_amount) }}</td>
+           <td>{{ "{:.2f}".format(record.contract_share) }}%</td>
+       </tr>
+       {% endfor %}
+   </tbody>
+</table><br><br><br>
+{% endif %}
+</main>
+
+<!-- Loading overlay -->
+<div class="loading-overlay" id="loading-overlay">
+    <div class="spinner-content">
+        <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <div class="loading-message" id="loading-message">Generando el análisis solicitado, por favor espera...</div>
+    </div>
+</div>
+
+
+
+
+<footer>
+    <p>© 2024 Datatón Anticorrupción. <a href="https://vidalsalazar.upiita.mx/" target="_blank" style="color: #00b7ff; text-decoration: none;">Vidal Salazar Sánchez</a></p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Seleccionamos todos los botones y el overlay de carga
+        const buttons = document.querySelectorAll('.btn-icon');
+        const loadingOverlay = document.getElementById('loading-overlay');
+
+        // Agregamos un evento de clic a cada botón
+        buttons.forEach(button => {
+            button.addEventListener('click', function (event) {
+                const form = this.closest('form'); // Encuentra el formulario más cercano
+
+                if (form) {
+                    // Activar el overlay de carga
+                    loadingOverlay.classList.add('active');
+                    
+                    // El formulario se enviará automáticamente sin prevenir el evento
+                }
+            });
+        });
+    });
+</script>
+
+
+
+</body>
+</html>
