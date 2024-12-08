@@ -9,4 +9,3 @@ Ejecución:
 Ejecuta el servidor con python app.py.
 Accede a la aplicación en http://127.0.0.1:5000.
 Archivos temporales: Los resultados procesados se almacenan en la carpeta temp_results. Puedes limpiar esta carpeta utilizando la función clear_temp_files() incluida en el código.
-
